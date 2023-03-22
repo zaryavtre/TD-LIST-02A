@@ -14,22 +14,24 @@
     <title>TD LIST 02A</title>
   </head>
   <body>
+    <section class="blur-overlay"></section>
     <section class="app">
-      <section class="top-bar">
+      <section class="top-bar container">
         <div class="logo">
-          <img src="/images/logo_triangles.svg" />
+          <img src="/images/logo_triangles.svg" width="45px" />
         </div>
       </section>
-      <section class="header">
+      <section class="header container">
         <div class="heading-hero">
           <h1 class="h1">Todo's</h1>
         </div>
         <div class="plus-wrapper">
-          <div class="add-task">+</div>
+          <button class="add-task">+</button>
         </div>
       </section>
       <section class="add-modal">
-        <form>
+        <form class="modal-form">
+          <label class="label">Add Your Todo Task</label>
           <input
             type="text"
             class="input-add"
@@ -38,7 +40,7 @@
           <button type="submit" class="submit-btn">Add Task</button>
         </form>
       </section>
-      <section class="todo-wrapper"></section>
+      <section class="todo-wrapper container"></section>
     </section>
     <script src="app.js" type="module"></script>
   </body>
