@@ -92,6 +92,11 @@ a {
   z-index: 9;
 }
 
+.wrapper-flex {
+  display: flex;
+  flex-direction: column;
+}
+
 .modal-form {
   display: flex;
   flex-direction: column;
@@ -104,6 +109,8 @@ a {
   font-size: 2em;
   font-weight: 600;
   margin-bottom: 1em;
+  width: 100%;
+  text-align: center;
 }
 
 .input-add {

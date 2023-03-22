@@ -11,7 +11,7 @@ overlay.addEventListener('click', closeModal)
 submitBtn.addEventListener('click', renderTodo)
 if (todosArr >= 1) {
   deleteTodo.addEventListener('click', function (e) {
-    e.todosWrapper.innerHTML = ''
+    console.log(renderTodo)
   })
 }
 
@@ -26,14 +26,13 @@ function closeModal() {
 }
 
 function renderTodo() {
-  let theTodo = document.querySelector('.input-add').value
-  todosArr.push(theTodo)
-  console.log(theTodo)
+  let theTodo = document.querySelector('input[type="text"]')
+  todosArr.push(theTodo.value)
   todosWrapper.innerHTML += `
         <div class="todo-wrapper">
             <div class="p-wrapper">
                 <p class="todo-p">
-                    ${todosArr.slice(-1)}
+                    ${theTodo.value}
                 </p>
             </div>
             <div class="delete-wrapper">
@@ -42,5 +41,6 @@ function renderTodo() {
                 </button>
             </div>
         </div>`
+  theTodo.value = ''
   closeModal()
 }
