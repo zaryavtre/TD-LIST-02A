@@ -9,11 +9,6 @@ const todosArr = []
 addTask.addEventListener('click', openModal)
 overlay.addEventListener('click', closeModal)
 submitBtn.addEventListener('click', renderTodo)
-if (todosArr >= 1) {
-  deleteTodo.addEventListener('click', function (e) {
-    console.log(renderTodo)
-  })
-}
 
 function openModal() {
   overlay.classList.toggle('display-block')
@@ -37,7 +32,7 @@ function renderTodo() {
             </div>
             <div class="delete-wrapper">
                 <button class="delete">
-                    <img src="/images/delete-icon.svg" alt="delete-todo">
+                    <img id="btn-delete" src="/images/delete-icon.svg" alt="delete-todo">
                 </button>
             </div>
         </div>`
