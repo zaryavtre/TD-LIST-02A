@@ -3,8 +3,9 @@ const overlay = document.querySelector('.blur-overlay')
 const addModal = document.querySelector('.add-modal')
 const submitBtn = document.querySelector('.submit-btn')
 const todosWrapper = document.querySelector('.todos-wrapper')
-const deleteTodo = document.querySelector('.delete')
 const todosArr = []
+
+todosWrapper.addEventListener('click', deleteTodo)
 
 addTask.addEventListener('click', openModal)
 overlay.addEventListener('click', closeModal)
@@ -23,19 +24,34 @@ function closeModal() {
 function renderTodo() {
   let theTodo = document.querySelector('input[type="text"]')
   todosArr.push(theTodo.value)
+  let index = todosArr.length - 1 // get the index of the new todo
   todosWrapper.innerHTML += `
-        <div class="todo-wrapper">
+        <div class="todo-wrapper" id="todo-${index}">
             <div class="p-wrapper">
                 <p class="todo-p">
                     ${theTodo.value}
                 </p>
             </div>
             <div class="delete-wrapper">
-                <button class="delete">
-                    <img id="btn-delete" src="/images/delete-icon.svg" alt="delete-todo">
+                <button class="delete" data-index="${index}">
+                <img class="delete" src="/images/delete-icon.svg" alt="delete-todo" style="max-width: 100%; max-height: 100%;">
                 </button>
             </div>
         </div>`
   theTodo.value = ''
   closeModal()
+}
+
+function deleteTodo(e) {
+  // check if the delete button was clicked
+  if (e.target.classList.contains('delete')) {
+    console.log(e.target.id)
+    let index = e.target.dataset.index
+    // remove the string from the array
+    todosArr.splice(index, 1)
+    //remove the corresponding div from the dom
+    let todoDiv = document.querySelector(`#todo-${index}`)
+    todoDiv.remove()
+    console.log(todosArr)
+  }
 }
