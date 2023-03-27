@@ -34,7 +34,7 @@ function renderTodo() {
             </div>
             <div class="delete-wrapper">
                 <button class="delete" data-index="${index}">
-                <img class="delete" src="/images/delete-icon.svg" alt="delete-todo" style="max-width: 100%; max-height: 100%;">
+                
                 </button>
             </div>
         </div>`
@@ -45,7 +45,6 @@ function renderTodo() {
 function deleteTodo(e) {
   // check if the delete button was clicked
   if (e.target.classList.contains('delete')) {
-    console.log(e.target.id)
     let index = e.target.dataset.index
     // remove the string from the array
     todosArr.splice(index, 1)

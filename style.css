@@ -159,7 +159,10 @@ a {
 .delete {
   background-color: transparent;
   border: none;
-  width: 100%;
+  width: 30px;
   height: 100%;
   cursor: pointer;
+  background-image: url('/images/delete-icon.svg');
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
 }
