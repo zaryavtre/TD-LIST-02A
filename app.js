@@ -3,7 +3,17 @@ const overlay = document.querySelector('.blur-overlay')
 const addModal = document.querySelector('.add-modal')
 const submitBtn = document.querySelector('.submit-btn')
 const todosWrapper = document.querySelector('.todos-wrapper')
+
 const todosArr = []
+
+const date = new Date()
+
+let day = date.getDate()
+let formating = new Intl.DateTimeFormat('en-us', { month: 'long' })
+let months = formating.format(new Date())
+let year = date.getFullYear()
+
+let currentDate = `${day} ${months} ${year}`
 
 todosWrapper.addEventListener('click', deleteTodo)
 
@@ -23,11 +33,16 @@ function closeModal() {
 
 function renderTodo() {
   let theTodo = document.querySelector('input[type="text"]')
-  todosArr.push(theTodo.value)
+  const arrayObject = {
+    todo: theTodo.value,
+    date: currentDate,
+  }
+  todosArr.push(arrayObject)
   let index = todosArr.length - 1 // get the index of the new todo
   todosWrapper.innerHTML += `
         <div class="todo-wrapper" id="todo-${index}">
             <div class="p-wrapper">
+                <h2>${currentDate}</h2>
                 <p class="todo-p">
                     ${theTodo.value}
                 </p>

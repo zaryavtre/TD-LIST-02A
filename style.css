@@ -121,6 +121,7 @@ a {
   padding: 0.8em;
   width: 100%;
   margin-bottom: 0.5em;
+  transition: all 300ms;
 }
 
 .submit-btn {
@@ -152,8 +153,23 @@ a {
   background-color: white;
   border-radius: 1em;
   width: 33%;
-  padding: 1em;
-  height: 55px;
+  padding: 2em;
+  height: auto;
+  white-space: normal;
+  overflow-wrap: break-word;
+  overflow: hidden;
+}
+
+.p-wrapper {
+  display: flex;
+  flex-direction: column;
+  overflow-wrap: break-word;
+}
+
+.todo-p {
+  margin-top: 1em;
+  white-space: normal;
+  overflow-wrap: break-word;
 }
 
 .delete {
