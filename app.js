@@ -17,6 +17,7 @@ let year = date.getFullYear()
 let currentDate = `${day} ${months} ${year}`
 
 todosWrapper.addEventListener('click', deleteTodo)
+todosWrapper.addEventListener('click', completeTodo)
 
 addTask.addEventListener('click', openModal)
 overlay.addEventListener('click', closeModal)
@@ -24,10 +25,9 @@ submitBtn.addEventListener('click', renderTodo)
 document.addEventListener('DOMContentLoaded', renderDateInput)
 
 function renderDateInput() {
- dateWrapper.innerHTML = `
+  dateWrapper.innerHTML = `
  <input type="date" id="due-date-input" value="" min />`
- document.getElementById('due-date-input').valueAsDate = new Date();
-
+  document.getElementById('due-date-input').valueAsDate = new Date()
 }
 
 function openModal() {
@@ -50,11 +50,17 @@ function renderTodo() {
   let index = todosArr.length - 1 // get the index of the new todo
   todosWrapper.innerHTML += `
         <div class="todo-wrapper" id="todo-${index}">
-            <div class="p-wrapper">
+        <div class="todo-content">
+        <div class="round">
+          <input type="checkbox" id="checkbox" class="completed">
+          <label for="checkbox"></label>
+        </div>  
+          <div class="p-wrapper">
                 <h2>${currentDate}</h2>
                 <p class="todo-p">
                     ${theTodo.value}
                 </p>
+            </div>
             </div>
             <div class="delete-wrapper">
                 <button class="delete" data-index="${index}">
@@ -76,5 +82,14 @@ function deleteTodo(e) {
     let todoDiv = document.querySelector(`#todo-${index}`)
     todoDiv.remove()
     console.log(todosArr)
+  }
+}
+
+function completeTodo() {
+  let todoWrapper = document.querySelector('.todo-wrapper')
+  if (document.querySelector('input[type="checkbox"').checked) {
+    todoWrapper.style.opacity = '45%'
+  } else {
+    todoWrapper.style.opacity = '100%'
   }
 }
