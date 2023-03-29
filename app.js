@@ -25,7 +25,9 @@ document.addEventListener('DOMContentLoaded', renderDateInput)
 
 function renderDateInput() {
  dateWrapper.innerHTML = `
- <input type="date" id="due-date-input" value="${date}" min />`
+ <input type="date" id="due-date-input" value="" min />`
+ document.getElementById('due-date-input').valueAsDate = new Date();
+
 }
 
 function openModal() {
