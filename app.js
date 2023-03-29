@@ -3,6 +3,7 @@ const overlay = document.querySelector('.blur-overlay')
 const addModal = document.querySelector('.add-modal')
 const submitBtn = document.querySelector('.submit-btn')
 const todosWrapper = document.querySelector('.todos-wrapper')
+const dateWrapper = document.querySelector('.date-render')
 
 const todosArr = []
 
@@ -20,6 +21,12 @@ todosWrapper.addEventListener('click', deleteTodo)
 addTask.addEventListener('click', openModal)
 overlay.addEventListener('click', closeModal)
 submitBtn.addEventListener('click', renderTodo)
+document.addEventListener('DOMContentLoaded', renderDateInput)
+
+function renderDateInput() {
+ dateWrapper.innerHTML = `
+ <input type="date" id="due-date-input" value="${date}" min />`
+}
 
 function openModal() {
   overlay.classList.toggle('display-block')
