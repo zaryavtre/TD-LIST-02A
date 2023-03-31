@@ -17,7 +17,7 @@ let year = date.getFullYear()
 let currentDate = `${day} ${months} ${year}`
 
 todosWrapper.addEventListener('click', deleteTodo)
-todosWrapper.addEventListener('change', completeTodo)
+todosWrapper.addEventListener('click', completeTodo)
 
 addTask.addEventListener('click', openModal)
 overlay.addEventListener('click', closeModal)
@@ -53,8 +53,8 @@ function renderTodo() {
         <div class="todo-wrapper" id="todo-${index}">
         <div class="todo-content">
         <div class="round">
-          <input type="checkbox" id="checkbox" class="completed">
-          <label for="checkbox"></label>
+          <input type="checkbox" id="${theTodo.value}" class="completed">
+          <label for="${theTodo.value}"></label>
         </div>  
           <div class="p-wrapper">
                 <h2>${valueDate}</h2>
@@ -87,11 +87,12 @@ function deleteTodo(e) {
 }
 
 function completeTodo(e) {
-  let todoWrapper = document.querySelector('.todo-wrapper')
-  console.log(e.target.classList.contains('completed'))
-  if (e.target.classList.contains('completed')) {
-    todoWrapper.style.opacity = '45%'
-  } else {
-    todoWrapper.style.opacity = '100%'
+  if (e.target.matches('input[type="checkbox"]')) {
+    let todoWrapper = e.target.closest('.todo-wrapper')
+    if (e.target.checked) {
+      todoWrapper.style.opacity = '45%'
+    } else {
+      todoWrapper.style.opacity = '100%'
+    }
   }
 }
