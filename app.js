@@ -50,7 +50,7 @@ function renderTodo() {
   todosArr.push(arrayObject)
   let index = todosArr.length - 1 // get the index of the new todo
   todosWrapper.innerHTML += `
-        <div class="todo-wrapper" id="todo-${index}">
+        <div class="todo-wrapper" id="todo-${index}"  data-index="${index}">
         <div class="todo-content">
         <div class="round">
           <input type="checkbox" id="${theTodo.value}" class="completed">
@@ -87,12 +87,49 @@ function deleteTodo(e) {
 }
 
 function completeTodo(e) {
+  let completeArray = []
+
   if (e.target.matches('input[type="checkbox"]')) {
     let todoWrapper = e.target.closest('.todo-wrapper')
+    let index = todoWrapper.getAttribute('data-index')
+    let completeArr = todosArr[index]
     if (e.target.checked) {
+      todosArr.splice(index, 1)
+      let todoDiv = document.querySelector(`#todo-${index}`)
+      todoDiv.remove()
+      completeArray.push(completeArr)
+      console.log(completeArray)
       todoWrapper.style.opacity = '45%'
+      //renderComplete()
     } else {
       todoWrapper.style.opacity = '100%'
     }
   }
+}
+
+function renderComplete() {
+  todosWrapper.innerHTML = `
+      <h1 class="completed-h1">Completed</h1>
+    `
+  todosWrapper.innerHTML += `
+    <div class="todo-wrapper" id="todo-${index}"  data-index="${index}">
+        <div class="todo-content">
+        <div class="round">
+          <input type="checkbox" id="${theTodo.value}" class="completed">
+          <label for="${theTodo.value}"></label>
+        </div>  
+          <div class="p-wrapper">
+                <h2>${valueDate}</h2>
+                <p class="todo-p">
+                    ${theTodo.value}
+                </p>
+            </div>
+            </div>
+            <div class="delete-wrapper">
+                <button class="delete" data-index="${index}">
+                
+                </button>
+            </div>
+        </div>
+  `
 }
