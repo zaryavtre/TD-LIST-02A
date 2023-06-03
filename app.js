@@ -13,6 +13,7 @@ document.addEventListener('click', function(e) {
     } else if (e.target.matches('.blur-overlay')) {
        closeOverlay()
     } else if (e.target.matches('.submit-btn')) {
+        closeOverlay()
         renderTodo()
     }
 })
@@ -37,19 +38,19 @@ function renderDateInput() {
 
 function todoTemplate(todoObject) {
     let templateTodo = ''
-   const inputValue = document.querySelector('input[type="text"]').value
-   const dateValue = document.querySelector('input[type="date"]').value
+    const inputValue = document.querySelector('input[type="text"]')
+    const dateValue = document.querySelector('input[type="date"]')
 
-   const values = [{
-    textInput: inputValue,
-    dateInput: dateValue 
-   }]
+    const values = [{
+        textInput: inputValue.value,
+        dateInput: dateValue.value
+    }]
 
-   todoObject.push(values[0])
+    todoObject.push(values[0])
 
-   const index = todoObject.length - 1
-   console.log(todoObject)
-   todoObject.forEach((todo) => {
+    const index = todoObject.length - 1
+   
+    todoObject.forEach((todo) => {
         templateTodo += `
         <div class="todo-wrapper" id="todo-${index}"  data-index="${index}">
             <div class="todo-content">
@@ -66,8 +67,10 @@ function todoTemplate(todoObject) {
             <button class="delete" data-index="${index}"></button>
         </div>
     </div>`
-    })   
-   return templateTodo
+    })
+
+    inputValue.value = ''
+    return templateTodo
 }
 
 function renderTodo() {
