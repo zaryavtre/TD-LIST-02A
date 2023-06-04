@@ -1,4 +1,7 @@
+import { UUID } from "https://unpkg.com/uuidjs@^5";
+
 const todoObject = []
+const uuid = UUID.generate()
 
 const date = new Date()
 let day = date.getDate()
@@ -15,6 +18,8 @@ document.addEventListener('click', function(e) {
     } else if (e.target.matches('.submit-btn')) {
         closeOverlay()
         renderTodo()
+    } else if(e.target.dataset.getid) {
+        deleteTodo(e.target.dataset.getid)
     }
 })
 
@@ -36,23 +41,36 @@ function renderDateInput() {
     document.getElementById('due-date-input').valueAsDate = new Date()
 }
 
+function deleteTodo(current) {
+    const todoIndex = todoObject.map(function(removeTodo) {
+        return removeTodo.id
+    }).indexOf(current)
+
+    
+    todoObject.splice(todoIndex, 1)
+    const removeDiv = document.querySelector(`#todo-${current}`)
+    removeDiv.remove()
+}
+
 function todoTemplate(todoObject) {
     let templateTodo = ''
+    
     const inputValue = document.querySelector('input[type="text"]')
     const dateValue = document.querySelector('input[type="date"]')
 
     const values = [{
         textInput: inputValue.value,
-        dateInput: dateValue.value
+        dateInput: dateValue.value,
+        id: uuid
     }]
 
     todoObject.push(values[0])
 
-    const index = todoObject.length - 1
+    //const index = todoObject.length - 1
    
     todoObject.forEach((todo) => {
         templateTodo += `
-        <div class="todo-wrapper" id="todo-${index}"  data-index="${index}">
+        <div class="todo-wrapper" id="todo-${todo.id}"  data-todonum="${todo.id}">
             <div class="todo-content">
                 <div class="round">
                     <input type="checkbox" id="${todo.textInput}" class="completed">
@@ -64,7 +82,7 @@ function todoTemplate(todoObject) {
             </div>
         </div>
         <div class="delete-wrapper">
-            <button class="delete" data-index="${index}"></button>
+            <button class="delete" data-getid="${todo.id}"></button>
         </div>
     </div>`
     })
