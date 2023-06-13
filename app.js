@@ -1,7 +1,8 @@
-import { UUID } from "https://unpkg.com/uuidjs@^5";
+import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
 
 const todoObject = []
-const uuid = UUID.generate()
+const completedTodo = []
+const app = document.querySelector('.app')
 
 const date = new Date()
 let day = date.getDate()
@@ -20,6 +21,8 @@ document.addEventListener('click', function(e) {
         renderTodo()
     } else if(e.target.dataset.getid) {
         deleteTodo(e.target.dataset.getid)
+    }else if(e.target.checked) {
+        renderCompleted(e.target.checked)
     }
 })
 
@@ -41,18 +44,32 @@ function renderDateInput() {
     document.getElementById('due-date-input').valueAsDate = new Date()
 }
 
-function deleteTodo(current) {
+function renderCompleted(completedObj) {
+    const getCompletedObj = todoObject.map(function(getCompleted) {
+        return getCompleted.id === completedObj
+    })
+
+    getCompletedObj.completed = !getCompletedObj.completed
+
+    if(getCompletedObj.completed) {
+        todoObject[0].completed = !todoObject[0].completed
+    }
+
+}
+
+function deleteTodo(deleted) {
     const todoIndex = todoObject.map(function(removeTodo) {
         return removeTodo.id
-    }).indexOf(current)
+    }).indexOf(deleted)
 
     
     todoObject.splice(todoIndex, 1)
-    const removeDiv = document.querySelector(`#todo-${current}`)
+    const removeDiv = document.querySelector(`#todo-${deleted}`)
     removeDiv.remove()
 }
 
 function todoTemplate(todoObject) {
+
     let templateTodo = ''
     
     const inputValue = document.querySelector('input[type="text"]')
@@ -61,12 +78,11 @@ function todoTemplate(todoObject) {
     const values = [{
         textInput: inputValue.value,
         dateInput: dateValue.value,
-        id: uuid
+        id: uuidv4(),
+        completed: false
     }]
 
     todoObject.push(values[0])
-
-    //const index = todoObject.length - 1
    
     todoObject.forEach((todo) => {
         templateTodo += `
@@ -88,6 +104,7 @@ function todoTemplate(todoObject) {
     })
 
     inputValue.value = ''
+    
     return templateTodo
 }
 
